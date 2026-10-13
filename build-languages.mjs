@@ -799,30 +799,40 @@ function renderPage(langCode, isSubdir = true) {
         <section class="section how-it-works" id="how-it-works">
             <div class="container">
                 <div class="section-header text-center">
+                    <div class="steps-flow-badge">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>SIMPLE 3-STEP PROCESS</span>
+                    </div>
                     <h2 class="section-title" data-i18n="howTitle">${d.howTitle}</h2>
                     <p class="section-subtitle" data-i18n="howSubtitle">${d.howSubtitle}</p>
                 </div>
 
-                <div class="steps-grid">
-                    <div class="step-card glass-panel">
-                        <div class="step-number">01</div>
-                        <div class="step-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
-                        <h3 class="step-heading" data-i18n="step1Title">${d.step1Title}</h3>
-                        <p class="step-text" data-i18n="step1Desc">${d.step1Desc}</p>
+                <div class="steps-flow-grid">
+                    <div class="step-card modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-file-arrow-up"></i></div>
+                            <span class="step-pill-badge">STEP 01</span>
+                        </div>
+                        <h3 class="step-card-title" data-i18n="step1Title">${d.step1Title.replace(/^\d+\.\s*/, '')}</h3>
+                        <p class="step-card-desc" data-i18n="step1Desc">${d.step1Desc}</p>
                     </div>
 
-                    <div class="step-card glass-panel">
-                        <div class="step-number">02</div>
-                        <div class="step-icon"><i class="fa-solid fa-microchip"></i></div>
-                        <h3 class="step-heading" data-i18n="step2Title">${d.step2Title}</h3>
-                        <p class="step-text" data-i18n="step2Desc">${d.step2Desc}</p>
+                    <div class="step-card modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-microchip"></i></div>
+                            <span class="step-pill-badge">STEP 02</span>
+                        </div>
+                        <h3 class="step-card-title" data-i18n="step2Title">${d.step2Title.replace(/^\d+\.\s*/, '')}</h3>
+                        <p class="step-card-desc" data-i18n="step2Desc">${d.step2Desc}</p>
                     </div>
 
-                    <div class="step-card glass-panel">
-                        <div class="step-number">03</div>
-                        <div class="step-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
-                        <h3 class="step-heading" data-i18n="step3Title">${d.step3Title}</h3>
-                        <p class="step-text" data-i18n="step3Desc">${d.step3Desc}</p>
+                    <div class="step-card modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-file-arrow-down"></i></div>
+                            <span class="step-pill-badge">STEP 03</span>
+                        </div>
+                        <h3 class="step-card-title" data-i18n="step3Title">${d.step3Title.replace(/^\d+\.\s*/, '')}</h3>
+                        <p class="step-card-desc" data-i18n="step3Desc">${d.step3Desc}</p>
                     </div>
                 </div>
             </div>
@@ -1073,6 +1083,7 @@ console.log('Generated: root index.html');
 
 // Generate comprehensive sitemap.xml with all 5 languages
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>

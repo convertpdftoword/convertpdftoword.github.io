@@ -925,12 +925,12 @@ body[data-theme="light"] .how-step-card:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     margin-bottom: 22px;
 }
 
 /* Step pill badge (STEP 01) */
 .step-pill-badge,
-.step-number,
 .step-num-badge {
     font-family: var(--font-heading);
     font-size: 0.78rem;
@@ -946,6 +946,30 @@ body[data-theme="light"] .how-step-card:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Fallback for direct step-number child (never stretch, stay round in top-right) */
+.step-card > .step-number {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    padding: 0;
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border: 1px solid var(--border-glow);
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+    z-index: 2;
+    margin: 0;
 }
 
 /* Step Icon Box */
