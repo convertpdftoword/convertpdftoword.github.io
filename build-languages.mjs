@@ -581,6 +581,7 @@ function renderPage(langCode, isSubdir = true) {
 
             <nav class="nav-links">
                 <a href="#tool-section" class="nav-link active"><i class="fa-solid fa-wrench"></i> <span data-i18n="navTools">${d.navTools}</span></a>
+                <a href="${assetPrefix}articles/" class="nav-link"><i class="fa-solid fa-book-open"></i> <span>Guides (25)</span></a>
                 <a href="#how-it-works" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-i18n="navGuide">${d.navGuide}</span></a>
                 <a href="#features" class="nav-link"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="navSecurity">${d.navSecurity}</span></a>
                 <a href="#faq" class="nav-link"><i class="fa-solid fa-circle-question"></i> <span data-i18n="navFaq">${d.navFaq}</span></a>
@@ -983,11 +984,13 @@ function renderPage(langCode, isSubdir = true) {
                         </ul>
                     </div>
                     <div class="footer-col">
-                        <h4 data-i18n="footerColNav">${d.footerColNav}</h4>
+                        <h4>Knowledge Base</h4>
                         <ul>
-                            <li><a href="#how-it-works"><span data-i18n="navGuide">${d.navGuide}</span></a></li>
-                            <li><a href="#features"><span data-i18n="navSecurity">${d.navSecurity}</span></a></li>
-                            <li><a href="#faq"><span data-i18n="navFaq">${d.navFaq}</span></a></li>
+                            <li><a href="${assetPrefix}articles/">All 25 Guides & Tutorials</a></li>
+                            <li><a href="${assetPrefix}articles/how-to-convert-pdf-to-word-without-losing-formatting.html">Convert Without Losing Layout</a></li>
+                            <li><a href="${assetPrefix}articles/how-to-convert-scanned-pdf-to-editable-word.html">Convert Scanned PDF to Word</a></li>
+                            <li><a href="${assetPrefix}articles/merge-multiple-pdf-files-into-one.html">Merge PDFs Free</a></li>
+                            <li><a href="${assetPrefix}articles/split-pdf-pages-extract-pages.html">Split & Extract Pages</a></li>
                         </ul>
                     </div>
                 </div>
