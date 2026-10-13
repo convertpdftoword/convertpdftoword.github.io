@@ -1178,13 +1178,54 @@ const TOOLS_METADATA = [
     }
 ];
 
+const ACTION_NAMES = {
+    "merge": "Merge PDF Files",
+    "split": "Split PDF Pages",
+    "remove_pages": "Remove Pages from PDF",
+    "extract_pages": "Extract PDF Pages",
+    "organize": "Organize PDF Pages",
+    "scan_to_pdf": "Scan Documents to PDF",
+    "pdf_to_word": "Convert PDF to Word",
+    "pdf_to_excel": "Convert PDF to Excel",
+    "pdf_to_powerpoint": "Convert PDF to PowerPoint",
+    "pdf_to_jpg": "Convert PDF to JPG",
+    "pdf_to_pdfa": "Convert PDF to PDF/A",
+    "pdf_to_markdown": "Convert PDF to Markdown",
+    "word_to_pdf": "Convert Word to PDF",
+    "jpg_to_pdf": "Convert JPG to PDF",
+    "excel_to_pdf": "Convert Excel to PDF",
+    "powerpoint_to_pdf": "Convert PowerPoint to PDF",
+    "html_to_pdf": "Convert HTML to PDF",
+    "edit_pdf": "Edit PDF Online",
+    "rotate_pdf": "Rotate PDF Pages",
+    "add_page_numbers": "Add Page Numbers to PDF",
+    "crop_pdf": "Crop PDF Pages",
+    "add_watermark": "Add Watermark to PDF",
+    "sign_pdf": "Sign PDF Online",
+    "protect_pdf": "Protect PDF with Password",
+    "unlock_pdf": "Unlock Protected PDF",
+    "redact_pdf": "Redact Sensitive Data in PDF",
+    "compress_pdf": "Compress PDF File Size",
+    "repair_pdf": "Repair Corrupted PDF",
+    "ocr_pdf": "Perform OCR on PDF",
+    "translate_pdf": "Translate PDF Document",
+    "ai_pdf_summarizer": "Summarize PDF with AI",
+    "compare_pdf": "Compare PDF Documents",
+    "pdf_forms": "Fill & Create PDF Forms"
+};
+
+function getActionName(tool) {
+    return ACTION_NAMES[tool.toolKey] || tool.h1.split('(')[0].replace(/^Convert\s+/i, 'Convert ').trim();
+}
+
 // Template Generator for Standalone Tool Pages
 function renderStandaloneToolPage(tool, allTools) {
+    const actionName = getActionName(tool);
     const relatedLinksHtml = tool.related.map(relSlug => {
         const found = allTools.find(t => t.slug === relSlug);
         if (!found) return '';
         return `
-            <a href="./${found.slug}" class="article-dir-card" style="padding:18px;">
+            <a href="./${found.slug}" class="article-dir-card">
                 <span class="article-dir-tag">${found.category}</span>
                 <h4 style="font-size:1.05rem; font-family:var(--font-heading); margin-bottom:6px; color:var(--text-primary);">${found.h1.split('(')[0].trim()}</h4>
                 <p style="font-size:0.84rem; color:var(--text-secondary); line-height:1.4; margin:0;">${found.subtitle}</p>
@@ -1273,7 +1314,7 @@ function renderStandaloneToolPage(tool, allTools) {
         },
         {
           "@type": "HowTo",
-          "name": "How to use ${tool.h1.split('(')[0].trim()}",
+          "name": "How to ${actionName.replace(/"/g, '\\"')}",
           "description": "${tool.subtitle.replace(/"/g, '\\"')}",
           "step": [
             {
@@ -1457,42 +1498,57 @@ function renderStandaloneToolPage(tool, allTools) {
         </section>
 
         <!-- How It Works Section (3 Steps) -->
-        <section class="container" style="padding: 40px 0;">
-            <div class="section-header text-center" style="margin-bottom: 30px;">
-                <h2 style="font-size:2rem; font-family:var(--font-heading); margin-bottom:8px;">How to Use ${tool.h1.split('(')[0].trim()}</h2>
-                <p style="color:var(--text-secondary);">Fast, reliable, and completely private document processing in 3 easy steps.</p>
-            </div>
-            <div class="how-steps-grid">
-                <div class="how-step-card glass-panel">
-                    <div class="step-num-badge">1</div>
-                    <div class="step-icon-wrap"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <h3>1. Select Your File</h3>
-                    <p>${tool.step1}</p>
+        <section class="section how-it-works-standalone" id="how-to-use" style="padding: 40px 0;">
+            <div class="container">
+                <div class="section-header text-center" style="margin-bottom: 32px;">
+                    <div class="steps-flow-badge">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>SIMPLE 3-STEP PROCESS</span>
+                    </div>
+                    <h2 class="section-title">How to <span class="highlight">${actionName}</span> in 3 Easy Steps</h2>
+                    <p class="section-subtitle">Lightning-fast, highly accurate, and 100% private in-browser document processing.</p>
                 </div>
-                <div class="how-step-card glass-panel">
-                    <div class="step-num-badge">2</div>
-                    <div class="step-icon-wrap"><i class="fa-solid fa-gear"></i></div>
-                    <h3>2. Instant Local Execution</h3>
-                    <p>${tool.step2}</p>
-                </div>
-                <div class="how-step-card glass-panel">
-                    <div class="step-num-badge">3</div>
-                    <div class="step-icon-wrap"><i class="fa-solid fa-circle-check"></i></div>
-                    <h3>3. Download Document</h3>
-                    <p>${tool.step3}</p>
+
+                <div class="steps-flow-grid">
+                    <div class="modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                            <span class="step-pill-badge">STEP 01</span>
+                        </div>
+                        <h3 class="step-card-title">Select Document</h3>
+                        <p class="step-card-desc">${tool.step1}</p>
+                    </div>
+
+                    <div class="modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-gear"></i></div>
+                            <span class="step-pill-badge">STEP 02</span>
+                        </div>
+                        <h3 class="step-card-title">Local Processing</h3>
+                        <p class="step-card-desc">${tool.step2}</p>
+                    </div>
+
+                    <div class="modern-step-card">
+                        <div class="step-top-row">
+                            <div class="step-icon-wrap"><i class="fa-solid fa-file-arrow-down"></i></div>
+                            <span class="step-pill-badge">STEP 03</span>
+                        </div>
+                        <h3 class="step-card-title">Download Result</h3>
+                        <p class="step-card-desc">${tool.step3}</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Comprehensive Article Guide (Preventing Thin Content) -->
         <section class="container" style="padding: 20px 0 50px;">
-            <div class="article-wrapper" style="max-width: 860px; margin: 0 auto;">
-                <article class="article-content" style="background:var(--bg-glass); border:1px solid var(--border-glass); border-radius:var(--radius-xl); padding:40px;">
+            <div class="article-wrapper">
+                <article class="article-content">
                     <h2>${tool.article.h2_1}</h2>
                     <p>${tool.article.p1}</p>
                     <p>${tool.article.p2}</p>
 
-                    <div class="article-callout" style="margin:28px 0;">
+                    <div class="article-callout">
                         <p>💡 <strong>Security Guarantee:</strong> All document streams, vector geometries, and text layers are executed 100% inside your browser memory. We never upload, store, or inspect your documents.</p>
                     </div>
 
@@ -1508,13 +1564,19 @@ function renderStandaloneToolPage(tool, allTools) {
         </section>
 
         <!-- Frequently Asked Questions (FAQ) -->
-        <section class="container" style="padding: 20px 0 60px;">
-            <div class="section-header text-center" style="margin-bottom: 30px;">
-                <h2 style="font-size:2rem; font-family:var(--font-heading); margin-bottom:8px;">Frequently Asked Questions</h2>
-                <p style="color:var(--text-secondary);">Everything you need to know about using ${tool.h1.split('(')[0].trim()}.</p>
-            </div>
-            <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
-                ${faqsHtml}
+        <section class="section faq-standalone-section" id="faq" style="padding: 20px 0 60px;">
+            <div class="container">
+                <div class="section-header text-center" style="margin-bottom: 30px;">
+                    <div class="steps-flow-badge">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span>FAQ & HELP</span>
+                    </div>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Common questions and expert answers about how to ${actionName.toLowerCase()} securely.</p>
+                </div>
+                <div class="faq-container">
+                    ${faqsHtml}
+                </div>
             </div>
         </section>
 
