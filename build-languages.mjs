@@ -609,15 +609,18 @@ function renderPage(langCode, isSubdir = true) {
         </div>
     </header>
 
-    <!-- Top Ad Banner Space -->
-    <div class="container ad-wrapper ad-header-slot">
-        <div class="ad-placeholder" id="ad-slot-header">
-            <span class="ad-tag" data-i18n="adTag">${d.adTag}</span>
-            <div class="ad-demo-box">
-                <i class="fa-solid fa-rectangle-ad"></i>
-                <span data-i18n="adHeaderDemo">${d.adHeaderDemo}</span>
-            </div>
-        </div>
+    <!-- Banner Top 728 -->
+    <div class="banner-728-wrapper">
+        <script>
+            atOptions = {
+                'key': '72aae8a75da17a34e48ed84feaa311bf',
+                'format': 'iframe',
+                'height': 90,
+                'width': 728,
+                'params': {}
+            };
+        </script>
+        <script src="https://motionlesspatronage.com/72aae8a75da17a34e48ed84feaa311bf/invoke.js"></script>
     </div>
 
     <!-- Main Hero & Tool Section -->
@@ -784,14 +787,33 @@ function renderPage(langCode, isSubdir = true) {
             </div>
         </section>
 
-        <!-- Middle Ad Space -->
-        <div class="container ad-wrapper ad-middle-slot">
-            <div class="ad-placeholder" id="ad-slot-middle">
-                <span class="ad-tag" data-i18n="adTag">${d.adTag}</span>
-                <div class="ad-demo-box">
-                    <i class="fa-solid fa-rectangle-ad"></i>
-                    <span data-i18n="adMiddleDemo">${d.adMiddleDemo}</span>
-                </div>
+        <!-- Ads Duo Row 300x250 -->
+        <div class="ads-duo-row">
+            <!-- Iklan 300x250 Kiri -->
+            <div class="ad-container-300">
+                <script>
+                    atOptions = {
+                        'key': '5c2ef2cb97dff829617ea4c4e1d5ca7b',
+                        'format': 'iframe',
+                        'height': 250,
+                        'width': 300,
+                        'params': {}
+                    };
+                </script>
+                <script src="https://motionlesspatronage.com/5c2ef2cb97dff829617ea4c4e1d5ca7b/invoke.js"></script>
+            </div>
+            <!-- Iklan 300x250 Kanan -->
+            <div class="ad-container-300">
+                <script>
+                    atOptions = {
+                        'key': 'ef5cdc72a62a03d1d689161ba6bc82f6',
+                        'format': 'iframe',
+                        'height': 250,
+                        'width': 300,
+                        'params': {}
+                    };
+                </script>
+                <script src="https://grop.net/22/ef5cdc72a62a03d1d689161ba6bc82f6"></script>
             </div>
         </div>
 
@@ -961,15 +983,18 @@ function renderPage(langCode, isSubdir = true) {
             </div>
         </section>
 
-        <!-- Bottom Ad Space -->
-        <div class="container ad-wrapper ad-footer-slot">
-            <div class="ad-placeholder" id="ad-slot-bottom">
-                <span class="ad-tag" data-i18n="adTag">${d.adTag}</span>
-                <div class="ad-demo-box">
-                    <i class="fa-solid fa-rectangle-ad"></i>
-                    <span data-i18n="adBottomDemo">${d.adBottomDemo}</span>
-                </div>
-            </div>
+        <!-- Banner Bottom 728 -->
+        <div class="banner-728-wrapper">
+            <script>
+                atOptions = {
+                    'key': '4b03159602cba0243869c415124b923e',
+                    'format': 'iframe',
+                    'height': 90,
+                    'width': 728,
+                    'params': {}
+                };
+            </script>
+            <script src="https://motionlesspatronage.com/4b03159602cba0243869c415124b923e/invoke.js"></script>
         </div>
     </main>
 
@@ -1023,6 +1048,22 @@ function renderPage(langCode, isSubdir = true) {
 
     <!-- Main Application Logic -->
     <script src="${assetPrefix}app.js"></script>
+
+    <!-- Social Bar -->
+    <script data-cfasync="false" src="https://grop.net/14/eeb4cf0865d0471035c3185feaa05874"></script>
+
+    <!-- Histats.com START (aync) -->
+    <script type="text/javascript">var _Hasync= _Hasync|| [];
+    _Hasync.push(['Histats.start', '1,5057968,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function() {
+    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+    hs.src = ('//s10.histats.com/js15_as.js');
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();</script>
+    <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5057968&101" alt="" border="0"></a></noscript>
+    <!-- Histats.com END -->
 </body>
 </html>
 `;
@@ -1075,6 +1116,22 @@ const rootHtml = `<!DOCTYPE html>
         <a href="./fr/" style="color:#818cf8; margin: 0 10px;">Français</a> |
         <a href="./id/" style="color:#818cf8; margin: 0 10px;">Bahasa Indonesia</a>
     </p>
+
+    <!-- Social Bar -->
+    <script data-cfasync="false" src="https://grop.net/14/eeb4cf0865d0471035c3185feaa05874"></script>
+
+    <!-- Histats.com START (aync) -->
+    <script type="text/javascript">var _Hasync= _Hasync|| [];
+    _Hasync.push(['Histats.start', '1,5057968,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function() {
+    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+    hs.src = ('//s10.histats.com/js15_as.js');
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();</script>
+    <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5057968&101" alt="" border="0"></a></noscript>
+    <!-- Histats.com END -->
 </body>
 </html>`;
 
@@ -1173,5 +1230,11 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>
 `;
 
-fs.writeFileSync('d:/VSCODE/convertpdftoword.github.io/sitemap.xml', sitemapXml, 'utf8');
-console.log('Generated: sitemap.xml with all 5 multilingual paths');
+// Check if sitemap.xml already has full list of URLs; only initialize if missing
+const sitemapFilePath = 'd:/VSCODE/convertpdftoword.github.io/sitemap.xml';
+if (!fs.existsSync(sitemapFilePath) || fs.readFileSync(sitemapFilePath, 'utf8').length < 2000) {
+    fs.writeFileSync(sitemapFilePath, sitemapXml, 'utf8');
+    console.log('Generated: sitemap.xml with all 5 multilingual paths');
+} else {
+    console.log('Preserved existing comprehensive sitemap.xml');
+}
