@@ -405,6 +405,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSearchAndFilter();
     setupWorkbenchModal();
     setupDragAndDrop();
+    setupStarRatingWidget();
+
+    // Check for Standalone Embedded Tool Page
+    const standaloneTool = document.body.getAttribute('data-standalone-tool');
+    if (standaloneTool && ALL_TOOLS_DATABASE[standaloneTool]) {
+        initStandaloneTool(standaloneTool);
+    }
 
     // Check URL parameters for direct tool selection (e.g. ?tool=merge)
     const urlParams = new URLSearchParams(window.location.search);
@@ -484,9 +491,12 @@ function setupWorkbenchModal() {
     // Tool item click handler
     document.querySelectorAll('.mega-tool-item').forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const key = item.getAttribute('data-tool-key');
-            openToolWorkbench(key);
+            const href = item.getAttribute('href');
+            if (!href || href === '#' || href.startsWith('javascript:')) {
+                e.preventDefault();
+                const key = item.getAttribute('data-tool-key');
+                openToolWorkbench(key);
+            }
         });
     });
 
@@ -548,12 +558,141 @@ function closeToolWorkbench() {
 }
 
 function resetWorkbenchPanels() {
-    document.getElementById('wb-dropzone').classList.remove('hidden');
-    document.getElementById('wb-operations-panel').classList.add('hidden');
-    document.getElementById('wb-processing-panel').classList.add('hidden');
-    document.getElementById('wb-result-panel').classList.add('hidden');
-    document.getElementById('wb-progress-bar').style.width = '0%';
+    const dropzone = document.getElementById('wb-dropzone');
+    const ops = document.getElementById('wb-operations-panel');
+    const proc = document.getElementById('wb-processing-panel');
+    const res = document.getElementById('wb-result-panel');
+    const bar = document.getElementById('wb-progress-bar');
+
+    if (dropzone) dropzone.classList.remove('hidden');
+    if (ops) ops.classList.add('hidden');
+    if (proc) proc.classList.add('hidden');
+    if (res) res.classList.add('hidden');
+    if (bar) bar.style.width = '0%';
 }
+
+/* ===================================================================
+   Dedicated Standalone Tool Page Handler
+   =================================================================== */
+function initStandaloneTool(toolKey) {
+    const spec = ALL_TOOLS_DATABASE[toolKey];
+    if (!spec) return;
+
+    activeToolKey = toolKey;
+    currentToolFiles = [];
+    resetWorkbenchPanels();
+
+    // Configure File Input
+    const fileInput = document.getElementById('wb-file-input');
+    if (fileInput) {
+        fileInput.accept = spec.accept;
+        fileInput.multiple = spec.multiple;
+        fileInput.value = '';
+    }
+
+    // Render Dynamic Options
+    renderDynamicToolOptions(spec);
+
+    // Set Execute Button Label if present
+    const btnLabelEl = document.getElementById('btn-execute-label');
+    if (btnLabelEl) btnLabelEl.textContent = spec.btnLabel;
+}
+
+/* ===================================================================
+   Star Rating Widget (Persistent 5-Star Voting per Tool Page)
+   =================================================================== */
+function setupStarRatingWidget() {
+    const ratingBox = document.querySelector('.star-rating-box');
+    if (!ratingBox) return;
+
+    const toolSlug = ratingBox.getAttribute('data-tool-slug') || 
+                     window.location.pathname.split('/').pop().replace('.html', '') || 'general';
+    const stars = ratingBox.querySelectorAll('.star-icon');
+    const scoreEl = ratingBox.querySelector('.rating-score-highlight');
+    const countEl = ratingBox.querySelector('.rating-count-val');
+    const feedbackEl = ratingBox.querySelector('.rating-user-feedback');
+
+    const storageKey = `pdf_vote_${toolSlug}`;
+    let ratingData;
+    try {
+        ratingData = JSON.parse(localStorage.getItem(storageKey));
+    } catch (e) {}
+
+    // Deterministic pseudo-random base count between 1,200 and 2,400 based on slug
+    let hash = 0;
+    for (let i = 0; i < toolSlug.length; i++) hash = ((hash << 5) - hash) + toolSlug.charCodeAt(i);
+    const baseCount = 1350 + Math.abs(hash % 980);
+    const baseTotal = Math.round(baseCount * 4.9);
+
+    if (!ratingData) {
+        ratingData = {
+            count: baseCount,
+            total: baseTotal,
+            userVote: null
+        };
+    }
+
+    function renderRatingDisplay() {
+        const avg = Math.min(5.0, (ratingData.total / ratingData.count)).toFixed(1);
+        if (scoreEl) scoreEl.textContent = avg;
+        if (countEl) countEl.textContent = ratingData.count.toLocaleString();
+
+        const activeStars = ratingData.userVote ? ratingData.userVote : Math.round(avg);
+        stars.forEach(s => {
+            const val = parseInt(s.getAttribute('data-value'), 10);
+            if (val <= activeStars) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
+        });
+
+        if (ratingData.userVote && feedbackEl) {
+            feedbackEl.textContent = `You rated this ${ratingData.userVote} / 5 stars. Thank you!`;
+            feedbackEl.style.color = 'var(--success-color)';
+        }
+    }
+
+    renderRatingDisplay();
+
+    // Hover interactive states
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', () => {
+            const val = parseInt(star.getAttribute('data-value'), 10);
+            stars.forEach(s => {
+                const sVal = parseInt(s.getAttribute('data-value'), 10);
+                if (sVal <= val) {
+                    s.classList.add('hovered');
+                } else {
+                    s.classList.remove('hovered');
+                }
+            });
+        });
+
+        star.addEventListener('mouseleave', () => {
+            stars.forEach(s => s.classList.remove('hovered'));
+        });
+
+        star.addEventListener('click', () => {
+            const voteVal = parseInt(star.getAttribute('data-value'), 10);
+            if (!ratingData.userVote) {
+                ratingData.count += 1;
+                ratingData.total += voteVal;
+            } else {
+                ratingData.total = ratingData.total - ratingData.userVote + voteVal;
+            }
+            ratingData.userVote = voteVal;
+            localStorage.setItem(storageKey, JSON.stringify(ratingData));
+            renderRatingDisplay();
+
+            if (feedbackEl) {
+                feedbackEl.textContent = `★ Thank you for voting ${voteVal} / 5 stars!`;
+                feedbackEl.style.color = '#10b981';
+            }
+        });
+    });
+}
+
 
 /* ===================================================================
    Drag & Drop Handling
