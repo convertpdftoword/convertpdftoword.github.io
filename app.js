@@ -745,14 +745,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('pdf_theme') || 'dark';
     setTheme(savedTheme);
 
-    // Language initialization - Default English
-    const savedLang = localStorage.getItem('pdf_lang') || 'en';
-    setLanguage(savedLang);
+    // Language initialization - prioritize URL path (/en/, /ja/, /ru/, /fr/, /id/)
+    const activeLang = detectCurrentLang();
+    setLanguage(activeLang);
 
     // Setup UI interactions
     setupEventListeners();
     setupFaqAccordion();
 });
+
+function detectCurrentLang() {
+    const path = window.location.pathname.toLowerCase();
+    const match = path.match(/\/(en|ja|ru|fr|id)(\/|$)/);
+    if (match) return match[1];
+    return localStorage.getItem('pdf_lang') || 'en';
+}
 
 function setupEventListeners() {
     // Theme toggle
@@ -776,11 +783,12 @@ function setupEventListeners() {
     });
 
     // Language selection from dropdown
-    document.querySelectorAll('.lang-option').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const langCode = btn.getAttribute('data-lang');
-            setLanguage(langCode);
-            langDropdown.classList.add('hidden');
+    document.querySelectorAll('.lang-option').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const langCode = link.getAttribute('data-lang');
+            if (langCode) {
+                localStorage.setItem('pdf_lang', langCode);
+            }
         });
     });
 
