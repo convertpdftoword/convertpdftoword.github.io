@@ -581,6 +581,7 @@ function renderPage(langCode, isSubdir = true) {
 
             <nav class="nav-links">
                 <a href="#tool-section" class="nav-link active"><i class="fa-solid fa-wrench"></i> <span data-i18n="navTools">${d.navTools}</span></a>
+                <a href="${assetPrefix}all-tools.html" class="nav-link"><i class="fa-solid fa-table-cells-large"></i> <span>All Tools (33)</span></a>
                 <a href="${assetPrefix}articles/" class="nav-link"><i class="fa-solid fa-book-open"></i> <span>Guides (25)</span></a>
                 <a href="#how-it-works" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-i18n="navGuide">${d.navGuide}</span></a>
                 <a href="#features" class="nav-link"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="navSecurity">${d.navSecurity}</span></a>
@@ -1145,6 +1146,18 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convertpdftoword.github.io/all-tools.html</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convertpdftoword.github.io/articles/</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
 `;

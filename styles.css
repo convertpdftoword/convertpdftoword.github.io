@@ -1424,3 +1424,320 @@ body[data-theme="light"] .ad-placeholder {
     border-top: 1px solid var(--border-glass);
     padding-top: 12px;
 }
+
+/* ===================================================================
+   All Tools Mega Grid & Studio Workbench (33 PDF Tools Suite)
+   =================================================================== */
+.all-tools-page-wrapper {
+    padding: 30px 0 80px;
+}
+
+.all-tools-hero {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.all-tools-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-family: var(--font-heading);
+    margin-bottom: 12px;
+}
+
+.all-tools-hero p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* Search & Filter Bar */
+.tools-search-wrapper {
+    max-width: 700px;
+    margin: 0 auto 36px;
+    position: relative;
+}
+
+.tools-search-input {
+    width: 100%;
+    padding: 16px 20px 16px 48px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-xl);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    box-shadow: var(--shadow-md);
+    outline: none;
+    transition: all var(--transition-smooth);
+}
+
+.tools-search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-glow);
+}
+
+.tools-search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Category Filter Chips */
+.category-filter-chips {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.filter-chip {
+    padding: 8px 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-chip:hover, .filter-chip.active {
+    background: var(--primary-gradient);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 7-Column Mega Tools Grid */
+.all-tools-page-wrapper .container {
+    max-width: 1520px;
+    width: 96%;
+}
+
+.mega-tools-board {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-xl);
+    padding: 32px 24px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+body[data-theme="light"] .mega-tools-board {
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body[data-theme="light"] .mega-cat-title {
+    color: #64748b;
+    border-bottom-color: #f1f5f9;
+}
+
+body[data-theme="light"] .mega-tool-item:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+body[data-theme="light"] .mega-tool-label {
+    color: #1e293b;
+}
+
+.mega-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 1380px) {
+    .mega-tools-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 960px) {
+    .mega-tools-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 540px) {
+    .mega-tools-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mega-cat-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mega-cat-title {
+    font-size: 0.74rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-glass);
+    margin-bottom: 6px;
+}
+
+/* Individual Tool Item Card */
+.mega-tool-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+    width: 100%;
+}
+
+.mega-tool-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-glow);
+    transform: translateX(2px);
+}
+
+.mega-tool-icon-box {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+    flex-shrink: 0;
+}
+
+.mega-tool-label {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: normal;
+    line-height: 1.25;
+    word-break: normal;
+}
+
+.mega-tool-item.highlight-red .mega-tool-label {
+    color: #ef4444;
+    font-weight: 800;
+}
+
+/* Category Color Badges */
+.color-organize { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+.color-optimize { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.color-to-pdf   { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.color-from-pdf { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.color-edit     { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+.color-security { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; }
+.color-intel    { background: rgba(99, 102, 241, 0.15); color: #6366f1; }
+
+/* Workbench Modal Overlay */
+.workbench-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-smooth);
+}
+
+.workbench-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.workbench-card {
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    position: relative;
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: scale(0.95);
+    transition: transform var(--transition-smooth);
+}
+
+.workbench-modal.active .workbench-card {
+    transform: scale(1);
+}
+
+.workbench-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-glass);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+}
+
+.workbench-close-btn:hover {
+    color: #ef4444;
+    border-color: #ef4444;
+    transform: rotate(90deg);
+}
+
+/* Signature Pad Canvas */
+.signature-canvas-wrap {
+    border: 2px dashed var(--border-glass);
+    border-radius: var(--radius-md);
+    background: rgba(0, 0, 0, 0.2);
+    margin: 16px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.signature-canvas {
+    width: 100%;
+    height: 160px;
+    display: block;
+    cursor: crosshair;
+}
+
+.signature-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 8px;
+    border-top: 1px solid var(--border-glass);
+    background: var(--bg-surface-elevated);
+}
